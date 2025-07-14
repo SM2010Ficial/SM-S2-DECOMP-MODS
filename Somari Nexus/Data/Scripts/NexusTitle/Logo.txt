@@ -1,0 +1,77 @@
+// ----------------------------------
+// RSDK Project: Sonic Nexus v4
+// Script Description: Logo Script
+// Script Author: Taxman
+// Script Porter: Twanvanb1
+// ----------------------------------
+
+private alias Object.Value0 : Object.YSpeed
+private alias Object.Value1 : Object.ScaleSpeed
+
+event ObjectUpdate
+	
+	switch Object.PropertyValue
+	case 0
+		if Object.State < 4
+
+			Object.YSpeed += 16384
+			Object.YPos += Object.YSpeed
+
+			if Object.YPos > 7077888
+				Object.YPos = 7077888
+				Object.YSpeed >>= 1
+				FlipSign(Object.YSpeed)
+				Object.State++
+			end if
+		end if
+		break
+
+	case 1
+		if Object.State < 4
+			Object.ScaleSpeed -= 2
+			Object[1].Scale += Object.ScaleSpeed
+
+			if Object.Scale < 512
+				Object.Scale = 512
+				Object.ScaleSpeed >>= 1
+				FlipSign(Object.ScaleSpeed)
+				PlaySfx(SfxName[Land], false)
+				Object.State++
+			end if
+		end if
+		break
+	end switch
+
+end event
+
+event ObjectDraw
+	if Object.PropertyValue == 1
+		DrawSpriteFX(0, FX_SCALE, object.xpos, Object.YPos)
+	else
+		Object.Value2 += 8
+		if Object.Value2 > 511
+			Object.Value2 -= 512
+		end if
+
+		Sin(Object.Rotation, Object.Value2)
+		Object.Rotation >>= 4
+
+		temp1 = screen.ycenter
+		temp1 -= 12
+		DrawSpriteScreenXY(1, screen.xcenter, temp1)
+		DrawSpriteScreenXY(2, screen.xcenter, temp1)
+
+		temp0 = screen.xcenter
+		temp0 -= 52
+		DrawSpriteScreenFX(3, FX_ROTATE, temp0, 95)
+		end if
+	end if
+end event
+
+event ObjectStartup
+	LoadSpriteSheet("NexusTitle/Logo.gif")
+	
+	SpriteFrame(-128,-80,256,160,0,0)
+        SpriteFrame(-128,-80,256,160,161,255) //second frame someone help me
+end event
+
