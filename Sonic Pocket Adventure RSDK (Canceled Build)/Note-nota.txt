@@ -1,0 +1,3 @@
+Github it doesn´t allow the entire build cuz size or number of files, so i split all on parts, just download all and then select it all, then just extract normally
+
+Github no permite la build entera ya sea por tamaño o por numero de archivos, asi que tuve que dividir todo en partes, solo descarga todo, luego selecciona todas las partes y por ultimo extrae como se hace de costumbre
